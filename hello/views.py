@@ -87,3 +87,30 @@ def getAllPersons(request):
             return Response(serializer.data)
     except Exception as e:
         return Response({'error': str(e)}, status=500);        
+
+
+@api_view(['GET'])
+def getAllContactForms(request):
+    try:
+        with connection.cursor() as cursor:
+            # Your raw SQL query
+            sql = """
+
+                  SELECT 
+                        id         id 
+                        ,Name      name
+                        ,Email     field_1
+                        ,Message   field_2
+                        ,CreatedAt field_3
+                FROM
+                    ContactForm
+                ORDER BY 
+                    id desc
+                """
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            serializer = RawDataSerializer(rows, many=True, context={
+                                           'cursor': cursor})  # Pass cursor for field names
+            return Response(serializer.data)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)        
