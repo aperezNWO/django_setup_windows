@@ -1,19 +1,16 @@
 
 -----------------------------------------
--- main setup (not windows compatible)
+-- main setup (codespaces - ubuntu)
 -----------------------------------------
 
 # 1. Create and activate virtual environment
-sudo apt-get install python3-venv    # Install venv if not available
-python3 -m venv .venv
+sudo apt-get update
+sudo apt-get install -y python3.12-venv
+python3.12 -m venv .venv
+
+# 3. Activate the new environment
 source .venv/bin/activate
-
-## 2. Add Microsoft repository for SQL Server (optional, for DB connectivity)
-## curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-## sudo apt-get update
-
-## 3. Install ODBC Driver for SQL Server (only if connecting to MS SQL)
-## sudo ACCEPT_EULA=Y apt-get install msodbcsql17
+pip install --upgrade pip setuptools wheel
 
 # 2. Descargar e instalar la clave y el repositorio de Microsoft para Ubuntu/Debian
 curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.4.d/microsoft.asc
@@ -28,18 +25,15 @@ sudo apt-get update
 # Te pedirá aceptar los términos de licencia en la terminal (puedes usar las flechas y Enter)
 sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18 unixodbc-dev
 
-
 # 4. Install Python packages
 pip install django djangorestframework pyodbc mssql-django django-cors-headers
 
 # 5. ✅ ADD TENSORFLOW FOR AI MODEL TRAINING
 pip install tensorflow
 
-
 # 6. ✅ static files
 pip install whitenoise
 python manage.py collectstatic
-
 
 # 7. Optional shorcut for both 4. and 5. 
 pip freeze > requirements.txt
