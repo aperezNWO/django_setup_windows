@@ -115,7 +115,7 @@ df -h . && du -h --max-depth=1 | sort -hr
 --------------------------
 
 ## 0. save changes on git.
-git add * && git commit -m"fractal changes" && git push && git pull 
+git add * && git commit -m"codespaces ubuntu changes" && git push && git pull 
 
 ## 1. docker build -t my-spring-boot-app .
 docker buildx build -t django_setup_windows .
